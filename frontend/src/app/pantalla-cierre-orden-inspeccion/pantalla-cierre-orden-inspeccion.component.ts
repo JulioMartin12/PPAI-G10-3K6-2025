@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PantallaCierreOrdenInspeccionService } from '../services/pantalla-cierre-orden-inspeccion.service';
 import { OrdenDeInspeccion } from '../models/orden-de-inspeccion.model';
 import { Subscription } from 'rxjs';
-import { MotivoTipo } from '../models/motivo-tipo.model';
 
 @Component({
   selector: 'app-pantalla-cierre-orden-inspeccion',
@@ -15,11 +14,8 @@ export class PantallaCierreOrdenInspeccionComponent implements OnInit, OnDestroy
   ordenesBackup: OrdenDeInspeccion[] = [];  
    motivoTipoLista: MotivoTipo[] = [];  
   
-   cargando = false;
-  errorCarga = false;
   modoObservacion: boolean = false;
   private subscriptions: Subscription = new Subscription();
-
   constructor(private pantallaCierreOrdenInspeccionService: PantallaCierreOrdenInspeccionService) {
     
   }
@@ -91,9 +87,10 @@ export class PantallaCierreOrdenInspeccionComponent implements OnInit, OnDestroy
 }
 
 guardarObservaciones() {
- 
+  console.log("Enviando órdenes seleccionadas:", this.ordenesSeleccionadas);
+
   this.pantallaCierreOrdenInspeccionService.tomarOrdenSelec(this.ordenesSeleccionadas).subscribe({
-    next: (res) => { 
+    next: (res) => {
       console.log("Respuesta:", res);
 
       // Luego de éxito:
@@ -115,9 +112,8 @@ cancelarObservacion() {
   this.limpiarSeleccion();
 }
 
-
 mostrarMotivosTiposParaSeleccion() {
-
 }
+
 
 }
