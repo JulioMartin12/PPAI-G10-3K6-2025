@@ -1,15 +1,30 @@
-package models;
+package PPAI_G10_3K6_2025.demo.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+
+@Entity
 public class Rol {
 
 
-	private String descripcionRol;
+	@Id
 	private String nombre;
+	private String descripcionRol;
+
+
+
+
+	public Rol() {
+
+	}
 
 	public Rol(String descripcionRol, String nombre) {
 		this.descripcionRol = descripcionRol;
 		this.nombre = nombre;
 	}
+
 
 
 	public String getDescripcionRol() {
@@ -34,4 +49,6 @@ public class Rol {
 	}
 
 	public void esResponsableDeReparacion(){}
+
+
 }

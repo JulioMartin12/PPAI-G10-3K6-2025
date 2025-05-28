@@ -1,15 +1,26 @@
-package models;
+package PPAI_G10_3K6_2025.demo.models;
+
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Entity
 public class OrdenDeInspeccion {
 
-    private double numeroOrden;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long numeroOrden;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFinalizacion;
     private String observacionCierre;
+
+    @ManyToOne
     private Empleado empleado;
+
+    @ManyToOne
     private EstacionSismologica estacionSismologica;
+
+    @ManyToOne
     private Estado estado;
 
 
@@ -17,14 +28,14 @@ public class OrdenDeInspeccion {
 
     }
 
-    public OrdenDeInspeccion(double numeroOrden, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFinalizacion, String observacionCierre) {
+    public OrdenDeInspeccion(long numeroOrden, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFinalizacion, String observacionCierre) {
         this.numeroOrden = numeroOrden;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFinalizacion = fechaHoraFinalizacion;
         this.observacionCierre = observacionCierre;
     }
 
-    public OrdenDeInspeccion(double numeroOrden, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFinalizacion, String observacionCierre, Empleado empleado, EstacionSismologica estacionSismologica, Estado estado) {
+    public OrdenDeInspeccion(long numeroOrden, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFinalizacion, String observacionCierre, Empleado empleado, EstacionSismologica estacionSismologica, Estado estado) {
         this.numeroOrden = numeroOrden;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFinalizacion = fechaHoraFinalizacion;
@@ -34,11 +45,11 @@ public class OrdenDeInspeccion {
         this.estado = estado;
     }
 
-    public double getNumeroOrden() {
+    public long getNumeroOrden() {
         return numeroOrden;
     }
 
-    public void setNumeroOrden(double numeroOrden) {
+    public void setNumeroOrden(long numeroOrden) {
         this.numeroOrden = numeroOrden;
     }
 
@@ -103,7 +114,6 @@ public class OrdenDeInspeccion {
                 '}';
     }
 
-    public void sosEmpleadoLogueado(){}
 
     public Estado validarEstado(Estado realizado){
     	if (this.estado.getNombre().compareTo(realizado.getNombre())==0)
@@ -112,7 +122,7 @@ public class OrdenDeInspeccion {
     		return null;
     }
 
-    public  EstacionSismologica obtenerDatosEstacion(){
+    public EstacionSismologica obtenerDatosEstacion(){
         return getEstacionSismologica();
     }
 
