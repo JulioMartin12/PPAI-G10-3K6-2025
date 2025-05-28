@@ -83,7 +83,7 @@ public class GestorCierreOrdenInspeccion {
     }
 
     public void buscarOrdenes(){
-           for (Estado estado: this.cargarDatos.getEstados() ) {
+        /*   for (Estado estado: this.cargarDatos.getEstados() ) {
             if (estado.sosCompletamenteRealizada()) {
                 this.estadoRealizado = estado;
             }
@@ -92,14 +92,14 @@ public class GestorCierreOrdenInspeccion {
 
             if (ordenDeInspeccion.getEmpleado().equals(this.empleadoLogueado )&& estadoRealizado != null) {
                 if ( ordenDeInspeccion.getEstado().equals(estadoRealizado)) {
-                 /*   OrdenDeInspeccion orden = new OrdenDeInspeccion();
-                    orden.setNumeroOrden(ordenDeInspeccion.getNumeroOrden());*/
+                 *//*   OrdenDeInspeccion orden = new OrdenDeInspeccion();
+                    orden.setNumeroOrden(ordenDeInspeccion.getNumeroOrden());*//*
                     ordenes.add(ordenDeInspeccion);
     			}
 
                 }
     		}
-
+*/
     } 
 
     public void tomarOrdenSelec(int indice){
@@ -158,7 +158,7 @@ public class GestorCierreOrdenInspeccion {
             int indice=1;
             System.out.println("---Seleccione una Opcion----");
             for (OrdenDeInspeccion ordenDeInspeccion : getOrdenes()) {
-                System.out.println("Opcion "+indice+") Número de orden: "+ordenDeInspeccion.getNumeroOrden()+" Fecha Finalización:"+ordenDeInspeccion.getFechaHoraFinalizacion() + " Nombre Estacion: " + ordenDeInspeccion.getEstacionSismologica().getNombre() + " Identificador Sismografo: " + ordenDeInspeccion.getEstacionSismologica().getSismografo().getIdentificadorSismografo());
+                //System.out.println("Opcion "+indice+") Número de orden: "+ordenDeInspeccion.getNumeroOrden()+" Fecha Finalización:"+ordenDeInspeccion.getFechaHoraFinalizacion() + " Nombre Estacion: " + ordenDeInspeccion.getEstacionSismologica().getNombre() + " Identificador Sismografo: " + ordenDeInspeccion.getEstacionSismologica().getSismografo().getIdentificadorSismografo());
              indice ++;
             }
             System.out.println("Opcion 0) Salir.");
