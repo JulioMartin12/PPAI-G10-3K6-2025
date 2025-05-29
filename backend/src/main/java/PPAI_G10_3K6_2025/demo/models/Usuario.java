@@ -53,6 +53,10 @@ public class Usuario {
 
 	public void conocerEmpleado(){}
 
+	public long getRILogueado(Empleado empleado){
+		return empleado.getId();
+		}
+
 	@Override
 	public String toString() {
 		return "Usuario{" + "contrasena='" + contrasena + '\'' + ", nombreUsuario='" + nombreUsuario + '\'' + ", empleado=" + empleado + '}';

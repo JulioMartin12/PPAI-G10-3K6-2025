@@ -13,6 +13,7 @@ public class OrdenDeInspeccion {
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaHoraFinalizacion;
     private String observacionCierre;
+    private LocalDateTime fechaHoraCierre;
 
     @ManyToOne
     private Empleado empleado;
@@ -35,7 +36,7 @@ public class OrdenDeInspeccion {
         this.observacionCierre = observacionCierre;
     }
 
-    public OrdenDeInspeccion(long numeroOrden, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFinalizacion, String observacionCierre, Empleado empleado, EstacionSismologica estacionSismologica, Estado estado) {
+    public OrdenDeInspeccion(long numeroOrden, LocalDateTime fechaHoraInicio, LocalDateTime fechaHoraFinalizacion, String observacionCierre, Empleado empleado, EstacionSismologica estacionSismologica, Estado estado, LocalDateTime fechaHoraCierre) {
         this.numeroOrden = numeroOrden;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFinalizacion = fechaHoraFinalizacion;
@@ -43,6 +44,15 @@ public class OrdenDeInspeccion {
         this.empleado = empleado;
         this.estacionSismologica = estacionSismologica;
         this.estado = estado;
+        this.fechaHoraCierre = fechaHoraCierre;
+    }
+
+    public LocalDateTime getFechaHoraCierre() {
+        return fechaHoraCierre;
+    }
+
+    public void setFechaHoraCierre(LocalDateTime fechaHoraCierre) {
+        this.fechaHoraCierre = fechaHoraCierre;
     }
 
     public long getNumeroOrden() {

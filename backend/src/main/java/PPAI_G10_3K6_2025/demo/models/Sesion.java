@@ -72,12 +72,12 @@ public class Sesion {
         return null;
     }
 
-    public  Usuario conocerUsuario(Sesion sesion) {
-        if( sesion.getUsuario().equals(this.getUsuario()) && sesion.getFechaHoraHasta() == null ) {
-            return sesion.getUsuario();
-        }
-        return null;
-    }
-}
+    public  boolean conocerUsuario(Sesion sesion) {
+//        if( sesion.getUsuario().equals(this.getUsuario()) && sesion.getFechaHoraHasta() == null ) {
+//            return true;//sesion.getUsuario();
+//        }
+//        return false;
+    return (sesion.getUsuario().equals(this.getUsuario()) && sesion.getFechaHoraHasta() == null);
+}}
 
 

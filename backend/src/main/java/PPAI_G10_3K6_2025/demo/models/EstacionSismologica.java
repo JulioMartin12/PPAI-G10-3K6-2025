@@ -18,6 +18,7 @@ public class EstacionSismologica {
     private double longitud;
     private String nombre;
     private double nroCertificacionAdquisicion;
+    private Sismografo sismografo;
 
     public EstacionSismologica() {
     }
@@ -35,6 +36,13 @@ public class EstacionSismologica {
 
     }
 
+    public Sismografo getSismografo() {
+        return sismografo;
+    }
+
+    public void setSismografo(Sismografo sismografo) {
+        this.sismografo = sismografo;
+    }
     public String getCodigoEstacion() {
         return codigoEstacion;
     }
@@ -105,7 +113,7 @@ public class EstacionSismologica {
                 '}';
     }
 
-    public void conoceSismografo() {}
+    public void conocerSismografo() {}
 
     public int obtenerIdentificadorSismografo(Sismografo sismografo) {
           return sismografo.sosMiSismografo(this.getCodigoEstacion(), sismografo.getEstacionSismologica().getCodigoEstacion());

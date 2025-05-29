@@ -96,4 +96,6 @@ public class Empleado {
         return id;
     }
 
+    public void buscarNotificables(){}
+
 }
