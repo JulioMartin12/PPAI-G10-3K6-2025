@@ -7,12 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
 import { PantallaCierreOrdenInspeccionComponent } from './pantalla-cierre-orden-inspeccion/pantalla-cierre-orden-inspeccion.component';
 import { FormsModule } from '@angular/forms';
+import { TablaMotivosComponent } from './pantalla-cierre-orden-inspeccion/tabla-motivos/tabla-motivos.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    PantallaCierreOrdenInspeccionComponent
+    PantallaCierreOrdenInspeccionComponent,
+    TablaMotivosComponent
   ],
   imports: [
     BrowserModule,
