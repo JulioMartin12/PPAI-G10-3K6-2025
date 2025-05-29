@@ -4,7 +4,7 @@ import { OrdenDeInspeccion } from '../models/orden-de-inspeccion.model';
 
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { Subscription } from 'rxjs';
+
 
 import { MotivoTipo } from '../models/motivo-tipo.model';
 
