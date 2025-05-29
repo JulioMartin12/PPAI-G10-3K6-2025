@@ -32,4 +32,9 @@ export class PantallaCierreOrdenInspeccionService {
     })
   );
 }
+
+enviarMotivosConComentarios(data: { [key: string]: string }) {
+  return this.http.post(`${this.apiUrl}/motivosTipo`, data);
+}
+
 }

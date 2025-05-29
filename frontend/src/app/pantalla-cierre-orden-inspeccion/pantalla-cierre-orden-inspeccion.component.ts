@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PantallaCierreOrdenInspeccionService } from '../services/pantalla-cierre-orden-inspeccion.service';
 import { OrdenDeInspeccion } from '../models/orden-de-inspeccion.model';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { MotivoTipo } from '../models/motivo-tipo.model';
 
 @Component({
   selector: 'app-pantalla-cierre-orden-inspeccion',
@@ -9,16 +10,39 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./pantalla-cierre-orden-inspeccion.component.css']
 })
 export class PantallaCierreOrdenInspeccionComponent implements OnInit, OnDestroy {
+
+  mapa: Map<string, string> = new Map();
+
+  tablaMotivo = false;
+  
   ordenesDeInspeccion: OrdenDeInspeccion[] = [];
   ordenesSeleccionadas: OrdenDeInspeccion[] = [];
   ordenesBackup: OrdenDeInspeccion[] = [];  
-   motivoTipoLista: MotivoTipo[] = [];  
-  
+  motivoTipoLista: string[] = [];  
+  cargando = true;
+  errorCarga = false;
+  observacionesGuardadas: boolean = false;
+  observacionesGuardadasLista: any[] = [];
+  btnVisible= false;
   modoObservacion: boolean = false;
   private subscriptions: Subscription = new Subscription();
   constructor(private pantallaCierreOrdenInspeccionService: PantallaCierreOrdenInspeccionService) {
     
   }
+
+
+  
+
+ recibirMapaActualizado(mapaActualizado: Map<string, string>) {
+    this.mapa = mapaActualizado;
+    console.log("Mapa recibido del hijo:", this.mapa);
+  }
+
+
+    
+   alternarMotivos() {
+   this.tablaMotivo = !this.tablaMotivo
+   }
 
   ngOnInit(): void {
    this.mostrarOrdenesOrdenadas();
@@ -83,20 +107,23 @@ export class PantallaCierreOrdenInspeccionComponent implements OnInit, OnDestroy
   aceptarSeleccion() {
     this.ordenesDeInspeccion =  this.ordenesSeleccionadas;
   this.modoObservacion = true;
+  this.btnVisible=true;
 
 }
 
 guardarObservaciones() {
   console.log("Enviando órdenes seleccionadas:", this.ordenesSeleccionadas);
-
+  this.motivoTipoLista = [];
   this.pantallaCierreOrdenInspeccionService.tomarOrdenSelec(this.ordenesSeleccionadas).subscribe({
-    next: (res) => {
-      console.log("Respuesta:", res);
-
-      // Luego de éxito:
-      this.modoObservacion = false;
+    next: (res: { [key: string]: string[] }) => {
+       this.motivoTipoLista = [];
+      for (let grupo in res) {
+        this.motivoTipoLista.push(...res[grupo]); 
+        
+      }
+      
+      console.log (this.motivoTipoLista); 
       this.ordenesSeleccionadas = [];
-      this.ordenesDeInspeccion = this.ordenesBackup;
       this.limpiarSeleccion();
     },
     error: (err) => {
@@ -104,6 +131,18 @@ guardarObservaciones() {
       alert("Ocurrió un error al guardar las observaciones.");
     }
   });
+
+  this.observacionesGuardadasLista = this.ordenesSeleccionadas
+    .filter(orden => orden.observacionCierre)
+    .map(orden => ({
+      id: orden.numeroOrden,
+      motivo: orden.observacionCierre,
+      seleccionada: false
+    }));
+
+
+  this.btnVisible=false;
+  this.alternarMotivos();  
 }
 
 cancelarObservacion() {
@@ -113,6 +152,34 @@ cancelarObservacion() {
 }
 
 mostrarMotivosTiposParaSeleccion() {
+}
+
+
+// Modifica tu método guardarObservaciones()
+//guardarObservaciones() {
+  // 1. Guardar las observaciones (tu lógica actual)
+  // ...
+  
+  // 2. Preparar datos para la tabla de observaciones
+  
+  // 3. Cambiar estados
+ 
+
+
+// Métodos para las nuevas acciones
+exportarObservaciones() {
+  const seleccionadas = this.observacionesGuardadasLista.filter(obs => obs.seleccionada);
+  console.log('Exportando:', seleccionadas);
+  // Tu lógica para exportar
+}
+
+eliminarObservaciones() {
+  this.observacionesGuardadasLista = this.observacionesGuardadasLista
+    .filter(obs => !obs.seleccionada);
+  
+  if (this.observacionesGuardadasLista.length === 0) {
+    this.observacionesGuardadas = false;
+  }
 }
 
 

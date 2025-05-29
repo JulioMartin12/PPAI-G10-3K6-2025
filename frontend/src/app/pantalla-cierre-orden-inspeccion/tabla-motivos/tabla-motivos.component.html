@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <div class="row">
+    <!-- Tabla -->
+    <div class="col-md-7">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>Seleccionar</th>
+              <th>Tipo de Motivo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let motivo of lista , let i= index">
+              <td>
+                <input
+                  type="radio"
+                  name="motivoSeleccionado"
+                  [value]="motivo"
+                  [(ngModel)]="motivoSeleccionado"
+                  (change)="motivoCheck(motivo, i)"
+                />
+              </td>
+              <td>{{ motivo }}</td>
+            </tr>
+          </tbody>
+        </table>
+      
+       <div class="d-flex flex-column flex-md-row justify-content-center mt-3 gap-3"  *ngIf="finalizar">
+  
+  <button 
+    class="btn btn-danger py-2 px-4" (click) = "finalizarSeleccion()"
+     >
+    <i class="bi bi-arrow-counterclockwise me-2"></i>Finalizar Selección
+  </button>
+</div>
+</div>
+
+    </div>
+
+    <!-- Comentario -->
+    <div class="col-md-5" *ngIf="motivoSeleccionado">
+      <div class="mb-3">
+        <label for="comentario" class="form-label fw-bold">Comentario:</label>
+        <textarea
+          id="comentario"
+          class="form-control"
+          rows="3"
+          [(ngModel)]="comentario"
+          placeholder="Escriba un comentario aquí..."
+        ></textarea>
+      </div>
+      <button class="btn btn-primary" (click)="enviarComentario()">
+        Enviar Comentario
+      </button>
+    </div>
+  
+  </div>
+  
+</div>
