@@ -70,7 +70,7 @@ public class Estado {
     }
 
     public  boolean esAmbitoSismografo(Sismografo sismografo){
-        return this.getAmbito().equals(sismografo);
+        return this.getAmbito().equals("Sismografo");
     }
 
     public boolean esCerrado(){

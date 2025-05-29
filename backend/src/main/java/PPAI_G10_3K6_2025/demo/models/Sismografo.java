@@ -78,7 +78,7 @@ public class Sismografo {
         return estado;
     }
 
-    public void setestado(Estado estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -89,7 +89,7 @@ public class Sismografo {
     public void conocerestado() {}
 
     public  void actualizarEstado(Estado estado) {
-        this.setestado(estado) ;
+        this.setEstado(estado) ;
     }
 
     public  int sosMiSismografo(String codigoStacion, String codigoEstacionMiSismografo){

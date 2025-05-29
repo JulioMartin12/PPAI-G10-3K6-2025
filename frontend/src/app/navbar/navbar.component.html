@@ -2,7 +2,7 @@
   <div class="container-fluid">
 
     <a *ngIf="sesion; else cargando" class="navbar-brand">
-      {{ sesion.usuario?.empleado?.nombre }}
+      {{ sesion.usuario?.empleado?.nombre }} ({{sesion.usuario?.empleado?.mail}})
     </a>
     <ng-template #cargando>
       <span>Cargando sesión...</span>
@@ -22,15 +22,10 @@
             <li><a class="dropdown-item" routerLink="/cerrar-orden">Cerrar Orden de Inspección</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Separated link</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
         </li>
       </ul>
     </div>

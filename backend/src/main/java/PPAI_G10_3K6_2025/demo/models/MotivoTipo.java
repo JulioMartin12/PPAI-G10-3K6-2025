@@ -34,6 +34,9 @@ public class MotivoTipo {
         this.descripcion = descripcion;
     }
 
+    public boolean sosMotivo(String motivo){
+        return this.getNombre().equals(motivo);
+    }
 
     @Override
     public String toString() {

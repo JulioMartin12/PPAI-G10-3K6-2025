@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PantallaCierreOrdenInspeccionService } from '../services/pantalla-cierre-orden-inspeccion.service';
 import { OrdenDeInspeccion } from '../models/orden-de-inspeccion.model';
 import { Subscription } from 'rxjs';
+import { MotivoTipo } from '../models/motivo-tipo.model';
 
 @Component({
   selector: 'app-pantalla-cierre-orden-inspeccion',
@@ -13,7 +14,8 @@ export class PantallaCierreOrdenInspeccionComponent implements OnInit, OnDestroy
   ordenesSeleccionadas: OrdenDeInspeccion[] = [];
   ordenesBackup: OrdenDeInspeccion[] = [];  
    motivoTipoLista: MotivoTipo[] = [];  
-  
+   cargando = true;
+   errorCarga = false;
   modoObservacion: boolean = false;
   private subscriptions: Subscription = new Subscription();
   constructor(private pantallaCierreOrdenInspeccionService: PantallaCierreOrdenInspeccionService) {
@@ -55,21 +57,32 @@ export class PantallaCierreOrdenInspeccionComponent implements OnInit, OnDestroy
     return this.ordenesSeleccionadas.some(o => o.numeroOrden === orden.numeroOrden);
   }
 
+  // onCheckboxChange(orden: OrdenDeInspeccion, event: Event): void {
+  //   const target = event.target as HTMLInputElement;
+  //   const isChecked = target.checked;
+    
+  //   if (isChecked) {
+  //     if (!this.estaSeleccionada(orden)) {
+  //       this.ordenesSeleccionadas.push(orden);
+  //     }
+  //   } else {
+  //     this.ordenesSeleccionadas = this.ordenesSeleccionadas.filter(
+  //       o => o.numeroOrden !== orden.numeroOrden
+  //     );
+  //   }
+  // } Comentado por Alvaro, lo reescribi para solo permitir seleccionar una orden.
   onCheckboxChange(orden: OrdenDeInspeccion, event: Event): void {
     const target = event.target as HTMLInputElement;
     const isChecked = target.checked;
-    
+  
     if (isChecked) {
-      if (!this.estaSeleccionada(orden)) {
-        this.ordenesSeleccionadas.push(orden);
-      }
+      // Si se selecciona una nueva, limpiar el array y agregar solo esta
+      this.ordenesSeleccionadas = [orden];
     } else {
-      this.ordenesSeleccionadas = this.ordenesSeleccionadas.filter(
-        o => o.numeroOrden !== orden.numeroOrden
-      );
+      // Si se desmarca, limpiar el array
+      this.ordenesSeleccionadas = [];
     }
   }
-
   limpiarSeleccion(): void {
     this.ordenesSeleccionadas = [];
   }

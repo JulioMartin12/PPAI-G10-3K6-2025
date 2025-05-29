@@ -48,12 +48,13 @@ public class GestorCierreOrdenInspeccion {
     }
 
     public Empleado buscarEmpleadoLogueado(Sesion sesion) {
-
+        Empleado empleado = null;
         Usuario usuario = usuarioRepository.findByNombreUsuario(sesion.getUsuario().getNombreUsuario());
         if (usuario == null)
             throw new RuntimeException("Usuario no encontrado");
-        Empleado empleado = empleadoRepository.findById(usuario.getEmpleado().getId());
-
+        if (sesion.conocerUsuario(sesion)){
+            empleado = empleadoRepository.findById(usuario.getRILogueado(usuario.getEmpleado()));
+        }
         if (empleado == null)
             throw new RuntimeException("Empleado no encontrado");
 
